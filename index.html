@@ -1,0 +1,166 @@
+<!-- <input type="text" id="input">
+<button onclick="addtask()">Add Task</button>
+<ul id="todolist">
+
+    <li>Hello
+        <button onclick="deleteitem(event)">Delete</button>
+    </li>
+</ul>
+<script>
+    var ul=document.getElementById("todolist")
+    var input=document.getElementById("input")
+    function addtask(){
+        var li=document.createElement("li")
+        li.innerHTML=input.value + "<button onclick='deleteitem(event)'>Delete</button>"
+        ul.append(li)
+    }
+    function deleteitem(event){
+        // console.log(event.target.parentElement)
+        event.target.parentElement.remove()
+
+    }
+    
+</script> -->
+
+<!-- With CSS -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive To-Do List</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #007BFF;
+    }
+
+    #input {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: calc(100% - 22px);
+        margin-bottom: 10px;
+    }
+
+    button {
+        padding: 10px;
+        background-color: #007BFF;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        margin-left: 5px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #todolist {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        background-color: #fff;
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    li:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+
+    .delete-button {
+        background-color: #FF4136;
+        padding: 5px 10px;
+        font-size: 14px;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+    }
+
+    .delete-button:hover {
+        background-color: #c13c31;
+    }
+
+    .edit-button {
+        background-color: #FFC107;
+        padding: 5px 10px;
+        font-size: 14px;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+        margin-right: 5px;
+    }
+
+    .edit-button:hover {
+        background-color: #cc9a06;
+    }
+
+    .task-text {
+        flex-grow: 1;
+        margin: 0 10px;
+    }
+</style>
+</head>
+<body>
+    <h1>Interactive To-Do List</h1>
+    <input type="text" id="input">
+    <button onclick="addtask()">Add Task</button>
+    <ul id="todolist">
+        <li>
+            <span class="task-text">Welcome to To-Do List</span>
+            <button class="edit-button" onclick="edittask(this)">Edit</button>
+            <button class="delete-button" onclick="deleteitem(event)">Delete</button>
+        </li>
+    </ul>
+    <script>
+        var ul = document.getElementById("todolist");
+        var input = document.getElementById("input");
+
+        function addtask() {
+            if(input.value.trim() === '') {
+                alert('Please enter a task.');
+                return;
+            }
+
+            var li = document.createElement("li");
+            li.innerHTML = "<span class='task-text'>" + input.value + "</span><button class='edit-button' onclick='edittask(this)'>Edit</button><button class='delete-button' onclick='deleteitem(event)'>Delete</button>";
+            ul.append(li);
+            input.value = '';
+        }
+
+        function deleteitem(event) {
+            event.target.parentElement.remove();
+        }
+
+        function edittask(button) {
+            var taskText = button.previousElementSibling;
+            var newTask = prompt("Edit your task:", taskText.textContent);
+            if (newTask !== null && newTask.trim() !== '') {
+                taskText.textContent = newTask;
+            }
+        }
+    </script>
+</body>
+</html>
